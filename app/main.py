@@ -18,6 +18,7 @@ from app.services.translation_service import (
 )
 
 settings = get_settings()
+app = FastAPI(title=settings.app_name, version="1.1.0")
 app = FastAPI(title=settings.app_name, version="1.0.0")
 
 BASE_DIR = Path(__file__).resolve().parent
