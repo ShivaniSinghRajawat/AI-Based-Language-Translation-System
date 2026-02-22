@@ -21,7 +21,6 @@ This project solves that gap by providing a robust translation system with quali
 - **Business impact:** Speeds up multilingual support and collaboration workflows.
 - **Engineering impact:** Showcases clean separation of concerns (API layer, service layer, provider strategy).
 - **Reliability impact:** Uses provider failover to keep UX functional when third-party services degrade.
-- **Recruiter value:** Demonstrates backend engineering, UX focus, documentation discipline, testing, and DevOps readiness in one project.
 
 ## 3) Core Features
 - FastAPI backend with versioned API endpoint: `POST /api/v1/translate`
@@ -30,9 +29,7 @@ This project solves that gap by providing a robust translation system with quali
   - `LibreTranslateProvider` (HTTP API provider)
   - `LocalFallbackProvider` (graceful fallback)
 - Responsive, clean UI with accessible form structure
-- Home page: `GET /`
-- Human-readable health page: `GET /health`
-- Machine-readable health endpoint for probes: `GET /health/api`
+- Health endpoint for production monitoring: `GET /health`
 - Unit tests for translation service behavior
 - Dockerized deployment (`Dockerfile` + `docker-compose.yml`)
 
@@ -56,7 +53,6 @@ app/
     translation_service.py
   static/css/styles.css
   templates/index.html
-  templates/health.html
   main.py
 tests/
   test_translation_service.py
@@ -109,4 +105,4 @@ curl -X POST http://127.0.0.1:8000/api/v1/translate \
 
 ---
 
-If you are presenting this in interviews, position it as a **production-minded AI product prototype**: not just a model call, but a full-stack system with reliability and deployment rigor.
+

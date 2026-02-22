@@ -19,6 +19,7 @@ from app.services.translation_service import (
 
 settings = get_settings()
 app = FastAPI(title=settings.app_name, version="1.1.0")
+app = FastAPI(title=settings.app_name, version="1.0.0")
 
 BASE_DIR = Path(__file__).resolve().parent
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
@@ -30,6 +31,13 @@ service = TranslationService(
         LocalFallbackProvider(),
     ]
 )
+
+
+@app.get("/health")
+def health_check() -> dict[str, str]:
+    """Simple health endpoint for probes and local debugging."""
+
+    return {"status": "ok", "environment": settings.app_env}
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -46,28 +54,6 @@ def index(request: Request) -> HTMLResponse:
             "default_target": settings.default_target_language,
         },
     )
-
-
-@app.get("/health", response_class=HTMLResponse)
-def health_page(request: Request) -> HTMLResponse:
-    """Render a human-friendly application health page."""
-
-    return templates.TemplateResponse(
-        request=request,
-        name="health.html",
-        context={
-            "app_name": settings.app_name,
-            "status": "ok",
-            "environment": settings.app_env,
-        },
-    )
-
-
-@app.get("/health/api")
-def health_check() -> dict[str, str]:
-    """Machine-readable health endpoint for probes and monitors."""
-
-    return {"status": "ok", "environment": settings.app_env}
 
 
 @app.post("/api/v1/translate")
