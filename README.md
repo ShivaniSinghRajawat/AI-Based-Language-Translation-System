@@ -1,6 +1,6 @@
 # AI-Based Language Translation System
 
-A production-oriented, recruiter-friendly translation platform built with **Python**, **FastAPI**, and a responsive web UI. The project demonstrates clean architecture, reliable fallbacks, API-first design, and Docker-ready deployment.
+A production-oriented, translation platform built with **Python**, **FastAPI**, and a responsive web UI. The project demonstrates clean architecture, reliable fallbacks, API-first design, and Docker-ready deployment.
 
 ## 1) Problem Statement
 Global teams operate across many languages, and communication bottlenecks lead to:
@@ -21,7 +21,6 @@ This project solves that gap by providing a robust translation system with quali
 - **Business impact:** Speeds up multilingual support and collaboration workflows.
 - **Engineering impact:** Showcases clean separation of concerns (API layer, service layer, provider strategy).
 - **Reliability impact:** Uses provider failover to keep UX functional when third-party services degrade.
-- **Recruiter value:** Demonstrates backend engineering, UX focus, documentation discipline, testing, and DevOps readiness in one project.
 
 ## 3) Core Features
 - FastAPI backend with versioned API endpoint: `POST /api/v1/translate`
@@ -106,4 +105,4 @@ curl -X POST http://127.0.0.1:8000/api/v1/translate \
 
 ---
 
-If you are presenting this in interviews, position it as a **production-minded AI product prototype**: not just a model call, but a full-stack system with reliability and deployment rigor.
+
