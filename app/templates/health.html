@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ app_name }} - Health</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <nav class="top-nav">
+          <a href="/">Home</a>
+          <a href="/health" class="active">Health</a>
+        </nav>
+
+        <h1>Application Health</h1>
+        <p class="subtitle">Human-friendly service status page.</p>
+
+        <section class="results">
+          <h2>Status: {{ status }}</h2>
+          <p><strong>Environment:</strong> {{ environment }}</p>
+          <p><strong>Machine Endpoint:</strong> <code>/health/api</code></p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ app_name }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <nav class="top-nav">
+          <a href="/" class="active">Home</a>
+          <a href="/health">Health</a>
+        </nav>
+
+        <h1>{{ app_name }}</h1>
+        <p class="subtitle">Translate text with resilient AI-powered pipelines.</p>
+
+        <form id="translation-form">
+          <label for="source_language">Source language</label>
+          <select id="source_language" name="source_language" required>
+            {% for language in languages %}
+            <option value="{{ language.code }}" {% if language.code == default_source %}selected{% endif %}>
+              {{ language.name }} ({{ language.code }})
+            </option>
+            {% endfor %}
+          </select>
+
+          <label for="target_language">Target language</label>
+          <select id="target_language" name="target_language" required>
+            {% for language in languages %}
+            <option value="{{ language.code }}" {% if language.code == default_target %}selected{% endif %}>
+              {{ language.name }} ({{ language.code }})
+            </option>
+            {% endfor %}
+          </select>
+
+          <label for="text">Text to translate</label>
+          <textarea id="text" name="text" rows="7" placeholder="Enter the text you want to translate" required></textarea>
+
+          <button type="submit">Translate</button>
+        </form>
+
+        <section aria-live="polite" class="results" id="results">
+          <h2>Translation Output</h2>
+          <p id="translated_text">Your translated text appears here.</p>
+          <small id="provider"></small>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById("translation-form");
+      const translatedText = document.getElementById("translated_text");
+      const provider = document.getElementById("provider");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        translatedText.textContent = "Translating...";
+        provider.textContent = "";
+
+        const payload = {
+          text: form.text.value,
+          source_language: form.source_language.value,
+          target_language: form.target_language.value,
+        };
+
+        try {
+          const response = await fetch("/api/v1/translate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.detail || "Translation failed.");
+          }
+
+          translatedText.textContent = data.translated_text;
+          provider.textContent = `Provider: ${data.provider}`;
+        } catch (error) {
+          translatedText.textContent = error.message;
+        }
+      });
+    </script>
+  </body>
+</html>
