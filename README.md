@@ -1,6 +1,6 @@
 # AI-Based Language Translation System
 
-A production-oriented, recruiter-friendly translation platform built with **Python**, **FastAPI**, and a responsive web UI. The project demonstrates clean architecture, reliable fallbacks, API-first design, and Docker-ready deployment.
+A production-oriented, translation platform built with **Python**, **FastAPI**, and a responsive web UI. The project demonstrates clean architecture, reliable fallbacks, API-first design, and Docker-ready deployment.
 
 ## 1) Problem Statement
 Global teams operate across many languages, and communication bottlenecks lead to:
@@ -53,6 +53,7 @@ app/
     translation_service.py
   static/css/styles.css
   templates/index.html
+  templates/health.html
   main.py
 tests/
   test_translation_service.py
